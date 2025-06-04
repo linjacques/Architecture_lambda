@@ -3,6 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+
+file_system*
+#généré par spark
+artifacts*
+
 # C extensions
 *.so
 
