@@ -3,8 +3,24 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Spark output files
+**/_SUCCESS
+**/_SUCCESS.crc
+**/_*.crc
+**/_*.json.crc
+**/_metadata/
+**/_committed_*
+**/_started_*
+**/_temporary/
+**/_logs/
+**/_che
+*.part-0*
+*Checkpoints
+*_spark_metadata
+# Checkpoints and temp folders
+**/.sparkStaging/
+**/.spark-local-*
 
-file_system*
 #généré par spark
 artifacts*
 
