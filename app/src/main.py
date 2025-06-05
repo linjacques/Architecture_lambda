@@ -7,6 +7,7 @@ from writer.topic_writer import write_topic_to
 from data.generator.random_log import generate_log
 from jobs.batch_layer import batch_layer
 from jobs.speed_layer import speed_layer
+from jobs.merge import compact_files
 import time
 
 
@@ -63,12 +64,20 @@ def run_speed():
         stream_output_dir=stream_output_dir
     )
 
+def run_compactor(spark):    
+    compact_files(spark, "data/speed_metrics/by_ip", "data/compacted/by_ip", partitions=1)
+    compact_files(spark, "data/speed_metrics/by_agent", "data/compacted/by_agent", partitions=1)
+    compact_files(spark, "data/speed_metrics/by_day", "data/compacted/by_day", partitions=1)
+    time.sleep(3600) 
+
+
 # pour lancer toutes les fonctions en meme temps !
 threads = [
     threading.Thread(target=run_producer),  
     threading.Thread(target=run_writer),
     threading.Thread(target=run_speed),
-    threading.Thread(target=run_batch), # sauf celui là car on veut qu'il demarre apres run_speed
+    threading.Thread(target=run_batch),
+    threading.Thread(target=compact_files)
 ]
 
 for t in threads:
