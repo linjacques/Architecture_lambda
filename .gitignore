@@ -20,6 +20,8 @@ __pycache__/
 # Checkpoints and temp folders
 **/.sparkStaging/
 **/.spark-local-*
+**/*.crc
+
 
 #généré par spark
 artifacts*
